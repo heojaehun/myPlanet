@@ -16,29 +16,31 @@
 class Planet{
 public:
     Planet();
-    Planet(int _parent_id, float _distance);
+    Planet(Planet* _parent);
     ~Planet();
-    void setup(int _parent_id = -1);
-    void setup(int _parent_id, float _distance);
+    void setup();
+    void setup(Planet* _parent);
     void update();
     void draw();
     void setChild();
     
     int getId();
-    int getParent();
-    vector<int> getChildren();
+    Planet* getParent();
+    vector<Planet*> getChildren();
     ofVec2f getPosition();
+    float getSize();
+    float getTheta();
 private:
     bool center_of_the_world;
     int id;     // 본인 ID
     float distance;    // 부모와의 거리
-    int parent_id;    // 부모 ID
-    vector<int> children_id;  // 자식들 ID
-    Planet* parent_pointer;
+    vector<Planet*> children;  // 자식들 인스턴스
+    Planet* parent; // 부모 인스턴스
     
-    ofVec2f my_position;   // 현재 위치
-    float my_theta; // 현재 각위치
-    float my_size;  // 크기
+    ofVec2f parent_position;
+    ofVec2f position;   // 현재 위치
+    float theta; // 현재 각위치
+    float size;  // 크기
     
 };
 

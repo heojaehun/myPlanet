@@ -4,12 +4,12 @@
 void ofApp::setup(){
     ofBackground(0, 0, 0);
     
-    planet.setup();
+    mySolar.addPlanet();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    mySolar.update();
 }
 
 //--------------------------------------------------------------
@@ -17,13 +17,20 @@ void ofApp::draw(){
     ofPushMatrix();
     ofTranslate(ofGetWindowWidth()/2, ofGetWindowHeight()/2);
     ofSetColor(200, 200, 200);
-    ofDrawCircle(planet.getPosition(), 10);
+    mySolar.draw();
     ofPopMatrix();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    switch (key) {
+        case ' ':
+            mySolar.addPlanet();
+            break;
+            
+        default:
+            break;
+    }
 }
 
 //--------------------------------------------------------------
