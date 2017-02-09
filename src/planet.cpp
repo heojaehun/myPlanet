@@ -20,20 +20,22 @@ Planet::Planet(){
     position = ofVec2f(0, 0);
     theta = 0.0;
     speed = 0.1;
+    period = 1.0;
+    depth = 0;
 }
 
 Planet::Planet(Planet* _parent, float _distance){
     // 자식 행성 만들 때 호출
     parent = _parent;
     id = parent->getId() + 1;
+    depth = parent->getDepth() + 1;
     distance = _distance;
     center_of_the_world = false;
-    size = 5.0;
+    size = 5.0/depth;
     theta = 0.0;
-    speed = ofRandom(0.01, 0.05);
+    speed = ofRandom(0.1/distance, 0.5/distance);
     parent_position = parent->getPosition();
     position = parent_position + ofVec2f(distance*sin(theta), distance*cos(theta));
-    
 }
 
 Planet::~Planet(){
@@ -102,4 +104,8 @@ float Planet::getSize(){
 
 float Planet::getTheta(){
     return theta;
+}
+
+int Planet::getDepth(){
+    return depth;
 }

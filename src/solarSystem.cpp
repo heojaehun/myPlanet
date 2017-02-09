@@ -29,7 +29,11 @@ void SolarSystem::addPlanet(){
     float min_distance;
     float max_distance;
     
-    if (brothers.size()==0) {
+    if (parent_planet->isCenterOfWorld() && brothers.size()==0) {
+        min_distance = 50;
+        max_distance = 70;
+    }
+    else if (brothers.size()==0) {
         min_distance = 20;
         max_distance = 50;
     }
@@ -78,10 +82,10 @@ void SolarSystem::draw(){
         ofVec2f planet_pos = planets[i]->getPosition();
         float planet_size = planets[i]->getSize();
         if (i == selected_planet_id) {
-            ofSetColor(0, 255, 0);
+            ofSetColor(255, 255, 255);
         }
         else {
-            ofSetColor(100, 100, 100);
+            ofSetColor(200, 200, 200);
         }
         ofDrawCircle(planet_pos, planet_size);
     }

@@ -16,7 +16,7 @@
 class Planet{
 public:
     Planet();
-    Planet(Planet* _parent, float _distance=20);
+    Planet(Planet* _parent, float _distance=50);
     ~Planet();
     void setup();
     void setup(Planet* _parent);
@@ -34,6 +34,7 @@ public:
     ofVec2f getPosition();
     float getSize();
     float getTheta();
+    int getDepth();
     
 private:
     bool center_of_the_world;
@@ -46,7 +47,9 @@ private:
     ofVec2f position;   // 현재 위치
     float theta; // 현재 각위치
     float speed; // 회전 속도
+    float period;   // 1회전 주기
     float size;  // 크기
+    int depth;
     
 };
 
