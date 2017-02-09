@@ -19,16 +19,18 @@ Planet::Planet(){
     size = 10.0;
     position = ofVec2f(0, 0);
     theta = 0.0;
+    speed = 0.1;
 }
 
-Planet::Planet(Planet* _parent){
+Planet::Planet(Planet* _parent, float _distance){
     // 자식 행성 만들 때 호출
     parent = _parent;
     id = parent->getId() + 1;
-    distance = 20;
+    distance = _distance;
     center_of_the_world = false;
     size = 5.0;
     theta = 0.0;
+    speed = ofRandom(0.01, 0.05);
     parent_position = parent->getPosition();
     position = parent_position + ofVec2f(distance*sin(theta), distance*cos(theta));
     
@@ -54,8 +56,8 @@ void Planet::setup(Planet* _parent){
 void Planet::update(){
     if (!center_of_the_world){
         parent_position = parent->getPosition();
-        theta = parent->getTheta()*2;   // <-------- 회전 속도 수정 필요
-        position = parent_position + ofVec2f(distance*sin(theta), distance*cos(theta));
+        theta = theta + speed;
+        position = parent_position + ofVec2f(distance * sin(theta), distance * cos(theta));
     }
     else{
         theta += SPEED;
@@ -66,12 +68,20 @@ void Planet::draw(){
     
 }
 
-void Planet::setChild(){
-    
+bool Planet::isCenterOfWorld(){
+    return center_of_the_world;
+}
+
+void Planet::setChild(Planet* _child){
+    children.push_back(_child);
 }
 
 int Planet::getId(){
     return id;
+}
+
+float Planet::getDistance(){
+    return distance;
 }
 
 Planet* Planet::getParent(){

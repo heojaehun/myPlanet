@@ -27,6 +27,15 @@ void ofApp::keyPressed(int key){
         case ' ':
             mySolar.addPlanet();
             break;
+        case OF_KEY_UP:
+            mySolar.selectNextPlanet();
+            break;
+        case OF_KEY_DOWN:
+            mySolar.selectPreviousPlanet();
+            break;
+        case 'f':
+            ofToggleFullscreen();
+            break;
             
         default:
             break;

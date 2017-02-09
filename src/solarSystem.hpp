@@ -21,15 +21,19 @@ public:
     SolarSystem();
     ~SolarSystem();
     void addPlanet();
+    void selectNextPlanet();
+    void selectPreviousPlanet();
     void deletePlanet();
     void changeCenter();
     void update();
     void draw();
     
     vector<ofVec2f> getAllPosition();
+    int getSelectedPlanetId();
     
 private:
     vector<Planet*> planets;
+    int selected_planet_id;
     
 };
 
